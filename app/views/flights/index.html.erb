@@ -1,0 +1,26 @@
+<div class="search-form">
+    <%= form_with url: root_path, method: :get do |f| %>
+        <h2>Search for flights</h2>
+
+        <div>
+            <%= f.label :departure_airport_id, "Origin" %>
+            <%= f.select(:departure_airport, @airport_options) %>
+        </div>
+
+        <div>
+            <%= f.label :arrival_airport_id, "Destination" %>
+            <%= f.select(:arrival_airport, @airport_options) %>
+        </div>
+
+        <div>
+            <%= f.label :date, "Departure date" %>
+            <%= f.select(:departure_date, @available_departure_dates) %>
+        </div>
+        
+        <div>
+            <%= f.label :passenger_count %>
+            <%= f.number_field :passenger_count, {within: 1..4, value:1} %>
+        </div>
+        <%= f.submit "Search" %>
+    <% end %>
+</div>

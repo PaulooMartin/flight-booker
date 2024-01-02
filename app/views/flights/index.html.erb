@@ -24,3 +24,30 @@
         <%= f.submit "Search" %>
     <% end %>
 </div>
+
+<div class="search-results">
+    <h2>Search results</h2>
+    <% if @chosen_flights.empty? %>
+        <p>No flights found.</p>
+    <% else %>
+        <%# url is a placeholder for now %>
+        <%# Could be placed in a partial %>
+        <%= form_with url: root_path, method: :get do |f| %>
+            <%= hidden_field_tag :passenger_count, params[:passenger_count] %>
+            <% @chosen_flights.each do |flight| %>
+                <div class="flight">
+                    <hr>
+                    <h3>Flight information</h3>
+                    <p>Departure Airport: <%= flight.departure_airport.iata_code %></p>
+                    <p>Arrival Airport: <%= flight.arrival_airport.iata_code %></p>
+                    <p>Departure Date: <%= flight.departure_date.strftime('%b %e %Y,%l:%M %p %Z') %></p>
+                    <p>Duration: <%= flight.duration_in_hours %> hours</p>
+                    <%= f.radio_button :flight, flight.id %>
+                </div>
+            <% end %>
+
+            <%= f.submit "Book chosen flight" %>        
+        <% end %>
+    <% end %>
+</div>
+

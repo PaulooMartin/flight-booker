@@ -42,7 +42,7 @@
                     <p>Arrival Airport: <%= flight.arrival_airport.iata_code %></p>
                     <p>Departure Date: <%= flight.departure_date.strftime('%b %e %Y,%l:%M %p %Z') %></p>
                     <p>Duration: <%= flight.duration_in_hours %> hours</p>
-                    <%= f.radio_button :flight, flight.id %>
+                    <%= f.radio_button :flight_id, flight.id %>
                 </div>
             <% end %>
 

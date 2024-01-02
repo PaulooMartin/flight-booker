@@ -4,6 +4,8 @@ class Flight < ApplicationRecord
   belongs_to :arrival_airport, class_name: "Airport", inverse_of: :arriving_flights,
                                 foreign_key: "arriving_airport_id"
 
+  has_many :bookings
+  has_many :passengers, through: :bookings
   def duration_in_hours
     ActiveSupport::Duration.build(duration).in_hours.round if duration
   end

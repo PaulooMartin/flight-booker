@@ -1,0 +1,6 @@
+<hr>
+<h3>Flight information</h3>
+<p>Departure Airport: <%= flight.departure_airport.iata_code %></p>
+<p>Arrival Airport: <%= flight.arrival_airport.iata_code %></p>
+<p>Departure Date: <%= flight.departure_date.strftime('%b %e %Y,%l:%M %p %Z') %></p>
+<p>Duration: <%= flight.duration_in_hours %> hours</p>

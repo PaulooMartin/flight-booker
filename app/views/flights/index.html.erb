@@ -30,9 +30,7 @@
     <% if @chosen_flights.empty? %>
         <p>No flights found.</p>
     <% else %>
-        <%# url is a placeholder for now %>
-        <%# Could be placed in a partial %>
-        <%= form_with url: root_path, method: :get do |f| %>
+        <%= form_with url: new_booking_path, method: :get do |f| %>
             <%= hidden_field_tag :passenger_count, params[:passenger_count] %>
             <% @chosen_flights.each do |flight| %>
                 <div class="flight">

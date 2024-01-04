@@ -1,0 +1,21 @@
+<h2>Book flight</h2>
+<%= render partial: 'application/flight_information', locals: {flight: @flight} %>
+
+<h3>Passengers</h3>
+<%= form_for @booking do |f_book| %>
+    <%# Might cause problems hardcoding flight id %>
+    <%= f_book.hidden_field :flight_id, value: @booking.flight_id %>
+
+    <%= f_book.fields_for :passengers do |f_passenger| %>
+        <div class="passenger-field">
+            <%= f_passenger.label :name, "Passenger name: "%>
+            <%= f_passenger.text_field :name %> <br>
+
+            <%= f_passenger.label :email, "Passenger email: "%>
+            <%= f_passenger.text_field :email %> <br>
+        </div>
+        <br>
+    <% end %>
+    <%= f_book.submit "Submit form" %>
+<% end %>
+  

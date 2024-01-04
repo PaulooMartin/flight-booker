@@ -33,7 +33,7 @@
         <%= form_with url: new_booking_path, method: :get do |f| %>
             <%= hidden_field_tag :passenger_count, params[:passenger_count] %>
             <% @chosen_flights.each do |flight| %>
-                <div class="flight">
+                <div class="flight-option">
                     <%= render partial: 'application/flight_information', locals: {flight: flight} %>
                     <%= f.radio_button :flight_id, flight.id %>
                 </div>

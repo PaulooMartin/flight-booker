@@ -2,8 +2,7 @@ class BookingsController < ApplicationController
   before_action :require_valid_search_params, only: :new
 
   def new
-    @flight = Flight.find(params[:flight_id])
-    @booking = @flight.bookings.new
+    @booking = Flight.find(params[:flight_id]).bookings.new
     params[:passenger_count].to_i.times { |_i| @booking.passengers.new }
   end
 

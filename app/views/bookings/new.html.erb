@@ -1,5 +1,5 @@
 <h2>Book flight</h2>
-<%= render partial: 'application/flight_information', locals: {flight: @flight} %>
+<%= render partial: 'application/flight_information', locals: {flight: @booking.flight} %>
 
 <h3>Passengers</h3>
 <%= form_for @booking do |f_book| %>

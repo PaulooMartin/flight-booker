@@ -1,6 +1,10 @@
 class BookingsController < ApplicationController
   before_action :require_valid_search_params, only: :new
 
+  def show
+    @booking = Booking.find(params[:id])
+  end
+
   def new
     @booking = Flight.find(params[:flight_id]).bookings.new
     params[:passenger_count].to_i.times { |_i| @booking.passengers.new }
@@ -9,11 +13,10 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
 
-    # root_path is temp
     if @booking.save
-      redirect_to root_path, notice: 'Good job'
+      redirect_to @booking
     else
-      redirect_to root_path, alert: 'Failed'
+      render :new, status: :unprocessable_entity
     end
   end
 

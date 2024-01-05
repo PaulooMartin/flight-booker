@@ -6,15 +6,23 @@
     <%# Might cause problems hardcoding flight id %>
     <%= f_book.hidden_field :flight_id, value: @booking.flight_id %>
 
-    <%= f_book.fields_for :passengers do |f_passenger| %>
-        <div class="passenger-field">
-            <%= f_passenger.label :name, "Passenger name: "%>
-            <%= f_passenger.text_field :name %> <br>
+    <% @booking.passengers.each do |passenger| %>
+        <%= f_book.fields_for :passengers, passenger do |f_passenger| %>
+            <div class="passenger-field">
+                <%= f_passenger.label :name, "Passenger name: "%>
+                <%= f_passenger.text_field :name %>
+                <% passenger.errors.full_messages_for(:name).each do |message| %>
+                    <p><i><%= message %></i></p>
+                <% end %><br>
 
-            <%= f_passenger.label :email, "Passenger email: "%>
-            <%= f_passenger.text_field :email %> <br>
-        </div>
-        <br>
+                <%= f_passenger.label :email, "Passenger email: "%>
+                <%= f_passenger.text_field :email %>
+                <% passenger.errors.full_messages_for(:email).each do |message| %>
+                    <p><i><%= message %></i></p>
+                <% end %><br>
+            </div>
+            <br>
+        <% end %>    
     <% end %>
     <%= f_book.submit "Submit form" %>
 <% end %>

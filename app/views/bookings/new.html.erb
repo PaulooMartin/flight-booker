@@ -13,17 +13,20 @@
             <% @booking.passengers.each do |passenger| %>
                 <%= f_book.fields_for :passengers, passenger do |f_passenger| %>
                     <div data-passenger-target="passengerField">
-                        <%= f_passenger.label :name, "Passenger name: "%>
-                        <%= f_passenger.text_field :name %>
-                        <% passenger.errors.full_messages_for(:name).each do |message| %>
-                            <p><i><%= message %></i></p>
-                        <% end %><br>
-
-                        <%= f_passenger.label :email, "Passenger email: "%>
-                        <%= f_passenger.text_field :email %>
-                        <% passenger.errors.full_messages_for(:email).each do |message| %>
-                            <p><i><%= message %></i></p>
-                        <% end %><br>
+                        <div class="field passenger-name">
+                            <%= f_passenger.label :name, "Passenger name: "%>
+                            <%= f_passenger.text_field :name %>
+                            <% passenger.errors.full_messages_for(:name).each do |message| %>
+                                <p><i><%= message %></i></p>
+                            <% end %><br>
+                        </div>
+                        <div class="field passenger-email">
+                            <%= f_passenger.label :email, "Passenger email: "%>
+                            <%= f_passenger.text_field :email %>
+                            <% passenger.errors.full_messages_for(:email).each do |message| %>
+                                <p><i><%= message %></i></p>
+                            <% end %><br>
+                        </div>
                         <button type="button" data-action="passenger#removePassenger" data-passenger-index-param="<%=f_passenger.index%>">Remove this passenger</button>
                     </div>
                     <br>
@@ -35,7 +38,17 @@
 
     <template data-passenger-target="fieldTemplate">
             <div data-passenger-target="passengerField">
-                
+                <div class="field passenger-name">
+                    <label>Passenger name:</label>
+                    <input type="text"><br>
+                </div>
+
+                <div class="field passenger-email">
+                    <label>Passenger email:</label>
+                    <input type="email"><br>
+                </div>
+
+                <button type="button" data-action="passenger#removePassenger">Remove this passenger</button>
             </div>
             <br>
     </template>

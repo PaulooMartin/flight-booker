@@ -2,28 +2,41 @@
 <%= render partial: 'application/flight_information', locals: {flight: @booking.flight} %>
 
 <h3>Passengers</h3>
-<%= form_for @booking do |f_book| %>
-    <%# Might cause problems hardcoding flight id %>
-    <%= f_book.hidden_field :flight_id, value: @booking.flight_id %>
+<div data-controller="passenger" data-passenger-passenger-count-value>
+    <button data-action="passenger#addPassenger">Add a new passenger</button>
+    
+    <%= form_for @booking do |f_book| %>
+        <%# Might cause problems hardcoding flight id %>
+        <%= f_book.hidden_field :flight_id, value: @booking.flight_id %>
 
-    <% @booking.passengers.each do |passenger| %>
-        <%= f_book.fields_for :passengers, passenger do |f_passenger| %>
-            <div class="passenger-field">
-                <%= f_passenger.label :name, "Passenger name: "%>
-                <%= f_passenger.text_field :name %>
-                <% passenger.errors.full_messages_for(:name).each do |message| %>
-                    <p><i><%= message %></i></p>
-                <% end %><br>
+        <div data-passenger-target="passengerFieldsArea">
+            <% @booking.passengers.each do |passenger| %>
+                <%= f_book.fields_for :passengers, passenger do |f_passenger| %>
+                    <div data-passenger-target="passengerField">
+                        <%= f_passenger.label :name, "Passenger name: "%>
+                        <%= f_passenger.text_field :name %>
+                        <% passenger.errors.full_messages_for(:name).each do |message| %>
+                            <p><i><%= message %></i></p>
+                        <% end %><br>
 
-                <%= f_passenger.label :email, "Passenger email: "%>
-                <%= f_passenger.text_field :email %>
-                <% passenger.errors.full_messages_for(:email).each do |message| %>
-                    <p><i><%= message %></i></p>
-                <% end %><br>
+                        <%= f_passenger.label :email, "Passenger email: "%>
+                        <%= f_passenger.text_field :email %>
+                        <% passenger.errors.full_messages_for(:email).each do |message| %>
+                            <p><i><%= message %></i></p>
+                        <% end %><br>
+                        <button type="button" data-action="passenger#removePassenger" data-passenger-index-param="<%=f_passenger.index%>">Remove this passenger</button>
+                    </div>
+                    <br>
+                <% end %>    
+            <% end %>
+        </div>
+        <%= f_book.submit "Submit form" %>
+    <% end %>
+
+    <template data-passenger-target="fieldTemplate">
+            <div data-passenger-target="passengerField">
+                
             </div>
             <br>
-        <% end %>    
-    <% end %>
-    <%= f_book.submit "Submit form" %>
-<% end %>
-  
+    </template>
+</div>

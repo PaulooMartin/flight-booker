@@ -61,8 +61,7 @@ group :development do
 
   gem "rubocop"
 
-  # gem "letter_opener"
-  # gem install mailcatcher
+  # gem install mailcatcher. Refer to https://mailcatcher.me/ for usage
 end
 
 group :test do

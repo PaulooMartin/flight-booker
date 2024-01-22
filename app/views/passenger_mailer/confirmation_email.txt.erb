@@ -1,0 +1,8 @@
+Booking reference: <%= @booking.id %>
+Booking for: <%= @passenger.name %>
+=====================================
+Flight Information
+Departure Airport: <%= @flight.departure_airport.iata_code %> 
+Arrival Airport: <%= @flight.arrival_airport.iata_code %>
+Departure Date: <%= @flight.departure_date.strftime('%b %e %Y,%l:%M %p %Z') %>
+Duration: <%= @flight.duration_in_hours %> hours

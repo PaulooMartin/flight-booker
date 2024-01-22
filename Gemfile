@@ -61,7 +61,8 @@ group :development do
 
   gem "rubocop"
 
-  gem "letter_opener"
+  # gem "letter_opener"
+  # gem install mailcatcher
 end
 
 group :test do

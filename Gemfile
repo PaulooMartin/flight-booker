@@ -60,6 +60,8 @@ group :development do
   # gem "spring"
 
   gem "rubocop"
+
+  gem "letter_opener"
 end
 
 group :test do
